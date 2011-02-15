@@ -1,4 +1,7 @@
-# TODO: optflags
+# TODO: 
+# - optflags
+# - review BR and R
+# - review configure options
 #
 # Conditional build:
 %bcond_without	introspection	# disable introspection
@@ -7,7 +10,7 @@ Summary:	Port of WebKit embeddable web component to GTK+
 Summary(pl.UTF-8):	Port osadzalnego komponentu WWW WebKit do GTK+
 Name:		gtk-webkit3
 Version:	1.3.11
-Release:	1
+Release:	0.1
 License:	BSD-like
 Group:		X11/Libraries
 Source0:	http://webkitgtk.org/webkit-%{version}.tar.gz
