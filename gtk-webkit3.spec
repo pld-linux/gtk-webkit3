@@ -144,9 +144,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/girepository-1.0/WebKit-3.0.typelib
 %endif
 %dir %{_datadir}/webkit-3.0
+%{_datadir}/webkit-3.0/resources
+%dir %{_datadir}/webkitgtk-3.0
 %{_datadir}/webkitgtk-3.0/images
 %{_datadir}/webkitgtk-3.0/webinspector
-%{_datadir}/webkit-3.0/resources
 /usr/share/glib-2.0/schemas/org.webkitgtk-3.0.gschema.xml
 
 %files devel
