@@ -9,12 +9,12 @@
 Summary:	Port of WebKit embeddable web component to GTK+
 Summary(pl.UTF-8):	Port osadzalnego komponentu WWW WebKit do GTK+
 Name:		gtk-webkit3
-Version:	1.3.12
-Release:	0.2
+Version:	1.3.13
+Release:	0.1
 License:	BSD-like
 Group:		X11/Libraries
 Source0:	http://webkitgtk.org/webkit-%{version}.tar.gz
-# Source0-md5:	f76350682f56761e734faba8689903b5
+# Source0-md5:	984adaafac545a89c24351fd4dbd743c
 URL:		http://webkitgtk.org/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
@@ -100,8 +100,8 @@ Pliki programistyczne WebKit.
 
 %build
 %{__gtkdocize}
-%{__aclocal} -I Source/autotools
 %{__libtoolize}
+%{__aclocal} -I Source/autotools
 %{__autoheader}
 %{__automake}
 %{__autoconf}
