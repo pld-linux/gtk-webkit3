@@ -126,8 +126,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/libwebkitgtk-3.0.la
 
-: > webkit-3.0.lang
-#find_lang webkit-3.0
+%find_lang webkit-3.0
 
 %clean
 rm -rf $RPM_BUILD_ROOT
