@@ -1,6 +1,5 @@
 # TODO: 
 # - optflags
-# - review BR and R
 # - review configure options
 #
 # Conditional build:
@@ -26,32 +25,34 @@ BuildRequires:	fontconfig-devel >= 2.4.0
 BuildRequires:	freetype-devel >= 1:2.1.8
 BuildRequires:	geoclue-devel
 BuildRequires:	gettext-devel
-BuildRequires:	glib2-devel >= 1:2.22.0
+BuildRequires:	glib2-devel >= 1:2.28.0
 BuildRequires:	glibc-misc
-%{?with_introspection:BuildRequires:	gobject-introspection-devel >= 0.9.5}
+%{?with_introspection:BuildRequires:	gobject-introspection-devel >= 0.10.0}
 BuildRequires:	gperf
 BuildRequires:	gstreamer-devel >= 0.10
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.25
-BuildRequires:	gtk+2-devel >= 2:2.20.0
+BuildRequires:	gtk+3-devel >= 3.0.0
 BuildRequires:	gtk-doc >= 1.10
 BuildRequires:	libicu-devel >= 4.2.1
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
-BuildRequires:	libsoup-devel >= 2.33.4
+BuildRequires:	libsoup-devel >= 2.33.6
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	libxml2-devel >= 1:2.6.30
 BuildRequires:	libxslt-devel >= 1.1.7
 BuildRequires:	pango-devel >= 1:1.12
 BuildRequires:	pkgconfig
+BuildRequires:	rpmbuild(macros) >= 1.592
 BuildRequires:	sqlite3-devel
 BuildRequires:	xorg-lib-libXft-devel >= 2.0.0
 BuildRequires:	xorg-lib-libXt-devel
+Requires(post,postun):	glib2 >= 1:2.26.0
 Requires:	cairo >= 1.6
 Requires:	enchant >= 0.22
 Requires:	gstreamer-plugins-base >= 0.10.25
-Requires:	gtk+2 >= 2:2.20.0
-Requires:	libsoup >= 2.30.0
+Requires:	gtk+3 >= 3.0.0
+Requires:	libsoup >= 2.33.6
 Requires:	libxml2 >= 1:2.6.30
 Requires:	libxslt >= 1.1.7
 Requires:	pango >= 1:1.12
@@ -69,25 +70,9 @@ Summary:	Development files for WebKit
 Summary(pl.UTF-8):	Pliki programistyczne WebKit
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	cairo-devel >= 1.6
-Requires:	enchant-devel >= 0.22
-Requires:	fontconfig-devel >= 2.4.0
-Requires:	freetype-devel >= 1:2.1.8
-Requires:	geoclue-devel
-Requires:	glib2-devel >= 1:2.22.0
-Requires:	gstreamer-devel >= 0.10
-Requires:	gstreamer-plugins-base-devel >= 0.10.25
-Requires:	gtk+2-devel >= 2:2.20.0
-Requires:	libicu-devel >= 4.2.1
-Requires:	libjpeg-devel
-Requires:	libpng-devel
-Requires:	libsoup-devel >= 2.30.0
-Requires:	libstdc++-devel
-Requires:	libxml2-devel >= 1:2.6.30
-Requires:	libxslt-devel >= 1.1.7
-Requires:	pango-devel >= 1:1.12
-Requires:	sqlite3-devel
-Requires:	xorg-lib-libXt-devel
+Requires:	glib2-devel >= 1:2.28.0
+Requires:	gtk+3-devel >= 3.0.0
+Requires:	libsoup-devel >= 2.33.6
 
 %description devel
 Development files for WebKit.
@@ -106,13 +91,13 @@ Pliki programistyczne WebKit.
 %{__automake}
 %{__autoconf}
 %configure \
-	--with-gtk=3.0 \
 	--disable-silent-rules \
+	%{__enable_disable introspection} \
+	--with-gtk=3.0 \
 	--enable-3d-transforms \
 	--enable-dom-storage \
 	--enable-geolocation \
 	--enable-icon-database \
-	%{__enable_disable introspection} \
 	--enable-video \
 	--with-font-backend=freetype
 
@@ -131,8 +116,13 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-p /sbin/ldconfig
-%postun	-p /sbin/ldconfig
+%post
+/sbin/ldconfig
+%glib_compile_schemas
+
+%postun
+/sbin/ldconfig
+%glib_compile_schemas
 
 %files -f webkit-3.0.lang
 %defattr(644,root,root,755)
@@ -149,7 +139,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/webkitgtk-3.0
 %{_datadir}/webkitgtk-3.0/images
 %{_datadir}/webkitgtk-3.0/webinspector
-/usr/share/glib-2.0/schemas/org.webkitgtk-3.0.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.webkitgtk-3.0.gschema.xml
 
 %files devel
 %defattr(644,root,root,755)
