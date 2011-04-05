@@ -35,7 +35,7 @@ BuildRequires:	gtk-doc >= 1.10
 BuildRequires:	libicu-devel >= 4.2.1
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
-BuildRequires:	libsoup-devel >= 2.33.6
+BuildRequires:	libsoup-devel >= 2.34.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	libxml2-devel >= 1:2.6.30
@@ -51,7 +51,7 @@ Requires:	cairo >= 1.6
 Requires:	enchant >= 0.22
 Requires:	gstreamer-plugins-base >= 0.10.25
 Requires:	gtk+3 >= 3.0.0
-Requires:	libsoup >= 2.33.6
+Requires:	libsoup >= 2.34.0
 Requires:	libxml2 >= 1:2.6.30
 Requires:	libxslt >= 1.1.7
 Requires:	pango >= 1:1.12
@@ -71,7 +71,7 @@ Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	glib2-devel >= 1:2.28.0
 Requires:	gtk+3-devel >= 3.0.0
-Requires:	libsoup-devel >= 2.33.6
+Requires:	libsoup-devel >= 2.34.0
 
 %description devel
 Development files for WebKit.
