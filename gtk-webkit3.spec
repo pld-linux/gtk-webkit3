@@ -1,5 +1,4 @@
 # TODO: 
-# - optflags
 # - review configure options
 #
 # Conditional build:
@@ -9,7 +8,7 @@ Summary:	Port of WebKit embeddable web component to GTK+
 Summary(pl.UTF-8):	Port osadzalnego komponentu WWW WebKit do GTK+
 Name:		gtk-webkit3
 Version:	1.3.13
-Release:	0.1
+Release:	1
 License:	BSD-like
 Group:		X11/Libraries
 Source0:	http://webkitgtk.org/webkit-%{version}.tar.gz
