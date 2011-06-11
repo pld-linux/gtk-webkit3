@@ -4,8 +4,8 @@
 # Conditional build:
 %bcond_without	introspection	# disable introspection
 #
-Summary:	Port of WebKit embeddable web component to GTK+
-Summary(pl.UTF-8):	Port osadzalnego komponentu WWW WebKit do GTK+
+Summary:	Port of WebKit embeddable web component to GTK+ 3
+Summary(pl.UTF-8):	Port osadzalnego komponentu WWW WebKit do GTK+ 3
 Name:		gtk-webkit3
 Version:	1.4.0
 Release:	1
@@ -43,7 +43,7 @@ BuildRequires:	libxslt-devel >= 1.1.7
 BuildRequires:	pango-devel >= 1:1.12
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.592
-BuildRequires:	sqlite3-devel
+BuildRequires:	sqlite3-devel >= 3.0
 BuildRequires:	xorg-lib-libXft-devel >= 2.0.0
 BuildRequires:	xorg-lib-libXt-devel
 Requires(post,postun):	glib2 >= 1:2.26.0
@@ -59,14 +59,14 @@ Requires:	pango >= 1:1.12
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-webkit is a port of the WebKit embeddable web component to GTK+.
+gtk-webkit3 is a port of the WebKit embeddable web component to GTK+ 3.
 
 %description -l pl.UTF-8
-webkit to port osadzalnego komponentu WWW WebKit do GTK+.
+gtk-webkit3 to port osadzalnego komponentu WWW WebKit do GTK+ 3.
 
 %package devel
-Summary:	Development files for WebKit
-Summary(pl.UTF-8):	Pliki programistyczne WebKit
+Summary:	Development files for WebKit for GTK+ 3
+Summary(pl.UTF-8):	Pliki programistyczne komponentu WebKit dla GTK+ 3
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	glib2-devel >= 1:2.28.0
@@ -74,13 +74,14 @@ Requires:	gtk+3-devel >= 3.0.0
 Requires:	libsoup-devel >= 2.34.0
 
 %description devel
-Development files for WebKit.
+Development files for WebKit for GTK+ 3.
 
 %description devel -l pl.UTF-8
-Pliki programistyczne WebKit.
+Pliki programistyczne komponentu WebKit dla GTK+ 3.
 
 %prep
 %setup -q -n webkit-%{version}
+
 mv Source/WebKit/gtk/po/{gr,el}.po
 
 %build
@@ -126,7 +127,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f webkit-3.0.lang
 %defattr(644,root,root,755)
-%doc ChangeLog
+%doc ChangeLog NEWS
 %attr(755,root,root) %{_bindir}/jsc-3
 %attr(755,root,root) %{_libdir}/libwebkitgtk-3.0.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libwebkitgtk-3.0.so.0
