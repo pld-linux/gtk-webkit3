@@ -1,5 +1,9 @@
-# TODO: 
-# - review configure options
+# TODO: review configure options:
+# - webgl, xhtmlmp, mathml, wml, wcss, web-audio, web-timing
+# - client-based-geolocation
+# - directory-upload
+# - APIs: indexed-database, input-speech, image-resizer
+# - HTML5: notifications, datagrid, data-transfer-items, file-system
 #
 # Conditional build:
 %bcond_without	introspection	# disable introspection
@@ -96,11 +100,7 @@ mv Source/WebKit/gtk/po/{gr,el}.po
 	%{__enable_disable introspection} \
 	--with-gtk=3.0 \
 	--enable-3d-transforms \
-	--enable-dom-storage \
-	--enable-geolocation \
-	--enable-icon-database \
-	--enable-video \
-	--with-font-backend=freetype
+	--enable-geolocation
 
 %{__make}
 
