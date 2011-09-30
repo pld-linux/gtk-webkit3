@@ -11,17 +11,17 @@
 Summary:	Port of WebKit embeddable web component to GTK+ 3
 Summary(pl.UTF-8):	Port osadzalnego komponentu WWW WebKit do GTK+ 3
 Name:		gtk-webkit3
-Version:	1.4.2
+Version:	1.6.1
 Release:	1
 License:	BSD-like
 Group:		X11/Libraries
 Source0:	http://webkitgtk.org/webkit-%{version}.tar.gz
-# Source0-md5:	361f8420e93d12101d650758fec09fa0
+# Source0-md5:	c11743694b1b71dad287b2e7a9e73b05
 URL:		http://webkitgtk.org/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 BuildRequires:	bison
-BuildRequires:	cairo-devel >= 1.6
+BuildRequires:	cairo-devel >= 1.10
 BuildRequires:	enchant-devel >= 0.22
 BuildRequires:	flex >= 2.5.33
 BuildRequires:	fontconfig-devel >= 2.4.0
@@ -33,7 +33,7 @@ BuildRequires:	glibc-misc
 %{?with_introspection:BuildRequires:	gobject-introspection-devel >= 0.10.0}
 BuildRequires:	gperf
 BuildRequires:	gstreamer-devel >= 0.10
-BuildRequires:	gstreamer-plugins-base-devel >= 0.10.25
+BuildRequires:	gstreamer-plugins-base-devel >= 0.10.30
 BuildRequires:	gtk+3-devel >= 3.0.0
 BuildRequires:	gtk-doc >= 1.10
 BuildRequires:	libicu-devel >= 4.2.1
@@ -48,12 +48,12 @@ BuildRequires:	pango-devel >= 1:1.12
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.592
 BuildRequires:	sqlite3-devel >= 3.0
-BuildRequires:	xorg-lib-libXft-devel >= 2.0.0
 BuildRequires:	xorg-lib-libXt-devel
+BuildRequires:	xorg-lib-libXrender-devel
 Requires(post,postun):	glib2 >= 1:2.26.0
-Requires:	cairo >= 1.6
+Requires:	cairo >= 1.10
 Requires:	enchant >= 0.22
-Requires:	gstreamer-plugins-base >= 0.10.25
+Requires:	gstreamer-plugins-base >= 0.10.30
 Requires:	gtk+3 >= 3.0.0
 Requires:	libsoup >= 2.34.0
 Requires:	libxml2 >= 1:2.6.30
@@ -86,8 +86,6 @@ Pliki programistyczne komponentu WebKit dla GTK+ 3.
 %prep
 %setup -q -n webkit-%{version}
 
-mv Source/WebKit/gtk/po/{gr,el}.po
-
 %build
 %{__gtkdocize}
 %{__libtoolize}
@@ -110,7 +108,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/libwebkitgtk-3.0.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/lib*.la
 
 %find_lang webkit-3.0
 
@@ -131,23 +129,26 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/jsc-3
 %attr(755,root,root) %{_libdir}/libwebkitgtk-3.0.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libwebkitgtk-3.0.so.0
+%attr(755,root,root) %{_libdir}/libjavascriptcoregtk-3.0.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libjavascriptcoregtk-3.0.so.0
 %if %{with introspection}
 %{_libdir}/girepository-1.0/JSCore-3.0.typelib
 %{_libdir}/girepository-1.0/WebKit-3.0.typelib
 %endif
-%dir %{_datadir}/webkit-3.0
-%{_datadir}/webkit-3.0/resources
 %dir %{_datadir}/webkitgtk-3.0
 %{_datadir}/webkitgtk-3.0/images
+%{_datadir}/webkitgtk-3.0/resources
 %{_datadir}/webkitgtk-3.0/webinspector
 %{_datadir}/glib-2.0/schemas/org.webkitgtk-3.0.gschema.xml
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libwebkitgtk-3.0.so
+%attr(755,root,root) %{_libdir}/libjavascriptcoregtk-3.0.so
 %if %{with introspection}
 %{_datadir}/gir-1.0/JSCore-3.0.gir
 %{_datadir}/gir-1.0/WebKit-3.0.gir
 %endif
 %{_includedir}/webkit-3.0
 %{_pkgconfigdir}/webkitgtk-3.0.pc
+%{_pkgconfigdir}/javascriptcoregtk-3.0.pc
