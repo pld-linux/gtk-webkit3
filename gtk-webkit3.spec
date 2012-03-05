@@ -11,12 +11,12 @@
 Summary:	Port of WebKit embeddable web component to GTK+ 3
 Summary(pl.UTF-8):	Port osadzalnego komponentu WWW WebKit do GTK+ 3
 Name:		gtk-webkit3
-Version:	1.6.1
-Release:	4
+Version:	1.6.3
+Release:	1
 License:	BSD-like
 Group:		X11/Libraries
-Source0:	http://webkitgtk.org/webkit-%{version}.tar.gz
-# Source0-md5:	c11743694b1b71dad287b2e7a9e73b05
+Source0:	http://webkitgtk.org/webkit-%{version}.tar.xz
+# Source0-md5:	c476d9335419df061510d31e21175df1
 URL:		http://webkitgtk.org/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
@@ -97,7 +97,6 @@ Pliki programistyczne komponentu WebKit dla GTK+ 3.
 	--disable-silent-rules \
 	%{__enable_disable introspection} \
 	--with-gtk=3.0 \
-	--enable-3d-transforms \
 	--enable-geolocation
 
 %{__make}
