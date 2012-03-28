@@ -11,13 +11,14 @@
 Summary:	Port of WebKit embeddable web component to GTK+ 3
 Summary(pl.UTF-8):	Port osadzalnego komponentu WWW WebKit do GTK+ 3
 Name:		gtk-webkit3
-Version:	1.6.3
+Version:	1.8.0
 Release:	1
 License:	BSD-like
 Group:		X11/Libraries
 Source0:	http://webkitgtk.org/webkit-%{version}.tar.xz
-# Source0-md5:	c476d9335419df061510d31e21175df1
+# Source0-md5:	52b2feb0fae01e68432b547bd85e8d74
 URL:		http://webkitgtk.org/
+BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 BuildRequires:	bison
@@ -28,7 +29,7 @@ BuildRequires:	fontconfig-devel >= 2.4.0
 BuildRequires:	freetype-devel >= 1:2.1.8
 BuildRequires:	geoclue-devel
 BuildRequires:	gettext-devel
-BuildRequires:	glib2-devel >= 1:2.28.0
+BuildRequires:	glib2-devel >= 1:2.32.0
 BuildRequires:	glibc-misc
 %{?with_introspection:BuildRequires:	gobject-introspection-devel >= 0.10.0}
 BuildRequires:	gperf
@@ -39,26 +40,27 @@ BuildRequires:	gtk-doc >= 1.10
 BuildRequires:	libicu-devel >= 4.2.1
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
-BuildRequires:	libsoup-devel >= 2.34.0
+BuildRequires:	libsoup-devel >= 2.38.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	libxml2-devel >= 1:2.6.30
 BuildRequires:	libxslt-devel >= 1.1.7
-BuildRequires:	pango-devel >= 1:1.12
+BuildRequires:	pango-devel >= 1:1.21.0
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.592
 BuildRequires:	sqlite3-devel >= 3.0
-BuildRequires:	xorg-lib-libXt-devel
 BuildRequires:	xorg-lib-libXrender-devel
-Requires(post,postun):	glib2 >= 1:2.26.0
+BuildRequires:	xorg-lib-libXt-devel
+BuildRequires:	zlib-devel
 Requires:	cairo >= 1.10
 Requires:	enchant >= 0.22
+Requires:	glib2 >= 1:2.32.0
 Requires:	gstreamer-plugins-base >= 0.10.30
 Requires:	gtk+3 >= 3.0.0
-Requires:	libsoup >= 2.34.0
+Requires:	libsoup >= 2.38.0
 Requires:	libxml2 >= 1:2.6.30
 Requires:	libxslt >= 1.1.7
-Requires:	pango >= 1:1.12
+Requires:	pango >= 1:1.21.0
 %{?with_introspection:Conflicts:	gir-repository < 0.6.5-7}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -73,15 +75,27 @@ Summary:	Development files for WebKit for GTK+ 3
 Summary(pl.UTF-8):	Pliki programistyczne komponentu WebKit dla GTK+ 3
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.28.0
+Requires:	glib2-devel >= 1:2.32.0
 Requires:	gtk+3-devel >= 3.0.0
-Requires:	libsoup-devel >= 2.34.0
+Requires:	libsoup-devel >= 2.38.0
 
 %description devel
 Development files for WebKit for GTK+ 3.
 
 %description devel -l pl.UTF-8
 Pliki programistyczne komponentu WebKit dla GTK+ 3.
+
+%package apidocs
+Summary:	WebKit API documentation
+Summary(pl.UTF-8):	Dokumentacja API WebKita
+Group:		Documentation
+Requires:	gtk-doc-common
+
+%description apidocs
+WebKit API documentation.
+
+%description apidocs -l pl.UTF-8
+Dokumentacja API WebKita.
 
 %prep
 %setup -q -n webkit-%{version}
@@ -97,7 +111,9 @@ Pliki programistyczne komponentu WebKit dla GTK+ 3.
 	--disable-silent-rules \
 	%{__enable_disable introspection} \
 	--with-gtk=3.0 \
-	--enable-geolocation
+	--enable-geolocation \
+	--enable-gtk-doc \
+	--with-html-dir=%{_gtkdocdir}
 
 %{__make}
 
@@ -114,13 +130,8 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post
-/sbin/ldconfig
-%glib_compile_schemas
-
-%postun
-/sbin/ldconfig
-%glib_compile_schemas
+%post -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
 
 %files -f webkit-3.0.lang
 %defattr(644,root,root,755)
@@ -138,7 +149,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/webkitgtk-3.0/images
 %{_datadir}/webkitgtk-3.0/resources
 %{_datadir}/webkitgtk-3.0/webinspector
-%{_datadir}/glib-2.0/schemas/org.webkitgtk-3.0.gschema.xml
 
 %files devel
 %defattr(644,root,root,755)
@@ -148,6 +158,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gir-1.0/JSCore-3.0.gir
 %{_datadir}/gir-1.0/WebKit-3.0.gir
 %endif
-%{_includedir}/webkit-3.0
+%{_includedir}/webkitgtk-3.0
 %{_pkgconfigdir}/webkitgtk-3.0.pc
 %{_pkgconfigdir}/javascriptcoregtk-3.0.pc
+
+%files apidocs
+%defattr(644,root,root,755)
+%{_gtkdocdir}/webkitgtk
