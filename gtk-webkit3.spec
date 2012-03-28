@@ -15,7 +15,7 @@ Version:	1.8.0
 Release:	1
 License:	BSD-like
 Group:		X11/Libraries
-Source0:	http://webkitgtk.org/webkit-%{version}.tar.xz
+Source0:	http://webkitgtk.org/releases/webkit-%{version}.tar.xz
 # Source0-md5:	52b2feb0fae01e68432b547bd85e8d74
 URL:		http://webkitgtk.org/
 BuildRequires:	OpenGL-GLU-devel
