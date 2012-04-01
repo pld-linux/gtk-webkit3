@@ -1,9 +1,9 @@
 # TODO: review configure options:
-# - webgl, xhtmlmp, mathml, wml, wcss, web-audio, web-timing
-# - client-based-geolocation
+# - accelerated-compositing, notifications, gamepad, dom-mutation-observers, input-color, media-source, media-stream, mhtml, web-audio, web-timing, touch-icon-loading, register-protocol-handler
 # - directory-upload
-# - APIs: indexed-database, input-speech, image-resizer
-# - HTML5: notifications, datagrid, data-transfer-items, file-system
+# - webkit2
+# - APIs: page-visibility-api, indexed-database, input-speech, image-resizer, quota, animation-api
+# - HTML5: microdata, datagrid, data-transfer-items, video-track, file-system, style-scoped
 #
 # Conditional build:
 %bcond_without	introspection	# disable introspection
