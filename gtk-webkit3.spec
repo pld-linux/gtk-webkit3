@@ -11,12 +11,12 @@
 Summary:	Port of WebKit embeddable web component to GTK+ 3
 Summary(pl.UTF-8):	Port osadzalnego komponentu WWW WebKit do GTK+ 3
 Name:		gtk-webkit3
-Version:	1.8.0
+Version:	1.8.1
 Release:	1
 License:	BSD-like
 Group:		X11/Libraries
 Source0:	http://webkitgtk.org/releases/webkit-%{version}.tar.xz
-# Source0-md5:	52b2feb0fae01e68432b547bd85e8d74
+# Source0-md5:	f2f01b1fdc7262a2eede81ebed0970b2
 URL:		http://webkitgtk.org/
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	autoconf >= 2.59
@@ -115,7 +115,7 @@ Dokumentacja API WebKita.
 	--enable-gtk-doc \
 	--with-html-dir=%{_gtkdocdir}
 
-%{__make}
+%{__make} -j1
 
 %install
 rm -rf $RPM_BUILD_ROOT
