@@ -11,12 +11,12 @@
 Summary:	Port of WebKit embeddable web component to GTK+ 3
 Summary(pl.UTF-8):	Port osadzalnego komponentu WWW WebKit do GTK+ 3
 Name:		gtk-webkit3
-Version:	1.8.1
+Version:	1.8.2
 Release:	1
 License:	BSD-like
 Group:		X11/Libraries
 Source0:	http://webkitgtk.org/releases/webkit-%{version}.tar.xz
-# Source0-md5:	f2f01b1fdc7262a2eede81ebed0970b2
+# Source0-md5:	f7bd0bd4f323039f15e19c82a9a8313c
 URL:		http://webkitgtk.org/
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	autoconf >= 2.59
@@ -35,7 +35,7 @@ BuildRequires:	glibc-misc
 BuildRequires:	gperf
 BuildRequires:	gstreamer-devel >= 0.10
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.30
-BuildRequires:	gtk+3-devel >= 3.0.0
+BuildRequires:	gtk+3-devel >= 3.4.0
 BuildRequires:	gtk-doc >= 1.10
 BuildRequires:	libicu-devel >= 4.2.1
 BuildRequires:	libjpeg-devel
@@ -56,7 +56,7 @@ Requires:	cairo >= 1.10
 Requires:	enchant >= 0.22
 Requires:	glib2 >= 1:2.32.0
 Requires:	gstreamer-plugins-base >= 0.10.30
-Requires:	gtk+3 >= 3.0.0
+Requires:	gtk+3 >= 3.4.0
 Requires:	libsoup >= 2.38.0
 Requires:	libxml2 >= 1:2.6.30
 Requires:	libxslt >= 1.1.7
@@ -76,7 +76,7 @@ Summary(pl.UTF-8):	Pliki programistyczne komponentu WebKit dla GTK+ 3
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	glib2-devel >= 1:2.32.0
-Requires:	gtk+3-devel >= 3.0.0
+Requires:	gtk+3-devel >= 3.4.0
 Requires:	libsoup-devel >= 2.38.0
 
 %description devel
