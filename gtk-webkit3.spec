@@ -17,11 +17,12 @@ License:	BSD-like
 Group:		X11/Libraries
 Source0:	http://webkitgtk.org/releases/webkit-%{version}.tar.xz
 # Source0-md5:	f7bd0bd4f323039f15e19c82a9a8313c
+Patch0:		%{name}-bison2.6.patch
 URL:		http://webkitgtk.org/
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
-BuildRequires:	bison
+BuildRequires:	bison >= 1.875
 BuildRequires:	cairo-devel >= 1.10
 BuildRequires:	enchant-devel >= 0.22
 BuildRequires:	flex >= 2.5.33
@@ -99,6 +100,7 @@ Dokumentacja API WebKita.
 
 %prep
 %setup -q -n webkit-%{version}
+%patch0 -p2
 
 %build
 %{__gtkdocize}
