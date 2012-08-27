@@ -50,8 +50,10 @@ BuildRequires:	pango-devel >= 1:1.21.0
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.592
 BuildRequires:	sqlite3-devel >= 3.0
+BuildRequires:	tar >= 1:1.22
 BuildRequires:	xorg-lib-libXrender-devel
 BuildRequires:	xorg-lib-libXt-devel
+BuildRequires:	xz
 BuildRequires:	zlib-devel
 Requires:	cairo >= 1.10
 Requires:	enchant >= 0.22
@@ -132,8 +134,8 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
 
 %files -f webkit-3.0.lang
 %defattr(644,root,root,755)
