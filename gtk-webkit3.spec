@@ -1,7 +1,6 @@
 # TODO: review configure options:
 # - accelerated-compositing, notifications, gamepad, dom-mutation-observers, input-color, media-source, media-stream, mhtml, web-audio, web-timing, touch-icon-loading, register-protocol-handler
 # - directory-upload
-# - webkit2
 # - APIs: page-visibility-api, indexed-database, input-speech, image-resizer, quota, animation-api
 # - HTML5: microdata, datagrid, data-transfer-items, video-track, file-system, style-scoped
 #
@@ -12,7 +11,7 @@ Summary:	Port of WebKit embeddable web component to GTK+ 3
 Summary(pl.UTF-8):	Port osadzalnego komponentu WWW WebKit do GTK+ 3
 Name:		gtk-webkit3
 Version:	1.10.0
-Release:	1
+Release:	2
 License:	BSD-like
 Group:		X11/Libraries
 Source0:	http://webkitgtk.org/releases/webkitgtk-%{version}.tar.xz
@@ -68,6 +67,8 @@ Requires:	pango >= 1:1.21.0
 %{?with_introspection:Conflicts:	gir-repository < 0.6.5-7}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define		filterout -g2
+
 %description
 gtk-webkit3 is a port of the WebKit embeddable web component to GTK+ 3.
 
@@ -111,6 +112,11 @@ Dokumentacja API WebKita.
 %{__autoheader}
 %{__automake}
 %{__autoconf}
+# replace -g2 with -g1 to not run into 4 GB ar format limit
+# https://bugs.webkit.org/show_bug.cgi?id=91154
+# http://sourceware.org/bugzilla/show_bug.cgi?id=14625
+export CFLAGS="%{rpmcflags} -g1"
+export CXXFLAGS="%{rpmcxxflags} -g1"
 %configure \
 	--disable-silent-rules \
 	%{__enable_disable introspection} \
