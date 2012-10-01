@@ -67,8 +67,6 @@ Requires:	pango >= 1:1.21.0
 %{?with_introspection:Conflicts:	gir-repository < 0.6.5-7}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		filterout -g2
-
 %description
 gtk-webkit3 is a port of the WebKit embeddable web component to GTK+ 3.
 
@@ -115,8 +113,8 @@ Dokumentacja API WebKita.
 # replace -g2 with -g1 to not run into 4 GB ar format limit
 # https://bugs.webkit.org/show_bug.cgi?id=91154
 # http://sourceware.org/bugzilla/show_bug.cgi?id=14625
-export CFLAGS="%{rpmcflags} -g1"
-export CXXFLAGS="%{rpmcxxflags} -g1"
+export CFLAGS="%(echo %{rpmcflags} | sed 's/ -g2/ -g1/g')"
+export CXXFLAGS="%(echo %{rpmcxxflags} | sed 's/ -g2/ -g1/g')"
 %configure \
 	--disable-silent-rules \
 	%{__enable_disable introspection} \
