@@ -1,7 +1,7 @@
 # TODO: review configure options:
-# - accelerated-compositing, notifications, gamepad, dom-mutation-observers, input-color, media-source, media-stream, mhtml, web-audio, web-timing, touch-icon-loading, register-protocol-handler
+# - notifications, gamepad, dom-mutation-observers, input-type-color, media-source, media-stream, mhtml, web-audio, web-timing, touch-icon-loading, register-protocol-handler, css-filters, css-compositing
 # - directory-upload
-# - APIs: page-visibility-api, indexed-database, input-speech, image-resizer, quota, animation-api
+# - APIs: page-visibility-api, indexed-database, input-speech, scripted-speech, image-resizer, quota, animation-api
 # - HTML5: microdata, datagrid, data-transfer-items, video-track, file-system, style-scoped
 #
 # Conditional build:
@@ -50,6 +50,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.592
 BuildRequires:	sqlite3-devel >= 3.0
 BuildRequires:	tar >= 1:1.22
+BuildRequires:	xorg-lib-libXcomposite-devel
 BuildRequires:	xorg-lib-libXrender-devel
 BuildRequires:	xorg-lib-libXt-devel
 BuildRequires:	xz
