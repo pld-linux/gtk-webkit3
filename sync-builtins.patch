@@ -25,7 +25,7 @@
  #elif OS(ANDROID)
  #include <sys/atomics.h>
  #endif
-+#ifdef HAVE_64BIT_SYNC_BUILTINS
++#ifndef HAVE_64BIT_SYNC_BUILTINS
 +#include <pthread.h>
 +#endif
  
