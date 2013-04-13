@@ -97,6 +97,7 @@ Requires:	%{name} = %{version}-%{release}
 Requires:	glib2-devel >= 1:2.36.0
 Requires:	gtk+3-devel >= 3.6.0
 Requires:	libsoup-devel >= 2.42.0
+Requires:	libstdc++-devel
 
 %description devel
 Development files for WebKit for GTK+ 3.
@@ -128,13 +129,13 @@ Dokumentacja API WebKita.
 %{__automake}
 %{__autoconf}
 %configure \
+	--disable-gtk-doc \
 	--disable-silent-rules \
+	--enable-geolocation \
 	--enable-glx \
 	%{__enable_disable introspection} \
 	--enable-webgl \
 	--with-gtk=3.0 \
-	--enable-geolocation \
-	--disable-gtk-doc \
 	--with-html-dir=%{_gtkdocdir}
 
 %{__make} -j1
