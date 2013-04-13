@@ -17,6 +17,7 @@ Group:		X11/Libraries
 Source0:	http://webkitgtk.org/releases/webkitgtk-%{version}.tar.xz
 # Source0-md5:	fa231ba8c9cd33575b9692614324be21
 Patch0:		sync-builtins.patch
+Patch1:		%{name}-sh.patch
 URL:		http://webkitgtk.org/
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	OpenGLES-devel
@@ -111,6 +112,7 @@ Dokumentacja API WebKita.
 %prep
 %setup -q -n webkitgtk-%{version}
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__libtoolize}
