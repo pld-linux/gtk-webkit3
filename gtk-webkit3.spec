@@ -1,8 +1,5 @@
 # TODO: review configure options:
-# - notifications, gamepad, dom-mutation-observers, input-type-color, media-source, media-stream, mhtml, web-audio, web-timing, touch-icon-loading, register-protocol-handler, css-filters, css-compositing
-# - directory-upload
-# - APIs: page-visibility-api, indexed-database, input-speech, scripted-speech, image-resizer, quota, animation-api
-# - HTML5: microdata, datagrid, data-transfer-items, video-track, file-system, style-scoped
+# - gamepad, web-audio
 #
 # Conditional build:
 %bcond_without	introspection	# disable introspection
@@ -19,8 +16,8 @@ Source0:	http://webkitgtk.org/releases/webkitgtk-%{version}.tar.xz
 Patch0:		sync-builtins.patch
 Patch1:		%{name}-sh.patch
 URL:		http://webkitgtk.org/
-BuildRequires:	OpenGL-GLU-devel
-BuildRequires:	OpenGLES-devel
+BuildRequires:	EGL-devel
+BuildRequires:	OpenGL-GLX-devel
 BuildRequires:	at-spi2-core-devel >= 2.6.0
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
@@ -30,6 +27,7 @@ BuildRequires:	enchant-devel >= 0.22
 BuildRequires:	flex >= 2.5.33
 BuildRequires:	fontconfig-devel >= 2.5.0
 BuildRequires:	freetype-devel >= 1:2.1.8
+BuildRequires:	gcc-c++ >= 6:4.7
 BuildRequires:	geoclue-devel
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.36.0
@@ -38,6 +36,8 @@ BuildRequires:	glibc-misc
 BuildRequires:	gperf
 BuildRequires:	gstreamer-devel >= 1.0.3
 BuildRequires:	gstreamer-plugins-base-devel >= 1.0.3
+# GTK+ 2.x for webkit2 plugin process; GTK+ 3 for base GUI
+BuildRequires:	gtk+2-devel >= 2:2.24.10
 BuildRequires:	gtk+3-devel >= 3.6.0
 BuildRequires:	gtk-doc >= 1.10
 BuildRequires:	harfbuzz-devel >= 0.9.7
@@ -52,23 +52,30 @@ BuildRequires:	libwebp-devel
 BuildRequires:	libxml2-devel >= 1:2.6.30
 BuildRequires:	libxslt-devel >= 1.1.7
 BuildRequires:	pango-devel >= 1:1.32.0
+BuildRequires:	perl-base
 BuildRequires:	pkgconfig
+BuildRequires:	python
 BuildRequires:	rpmbuild(macros) >= 1.592
 BuildRequires:	ruby
 BuildRequires:	sqlite3-devel >= 3.0
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	udev-glib-devel
 BuildRequires:	xorg-lib-libXcomposite-devel
+BuildRequires:	xorg-lib-libXdamage-devel
 BuildRequires:	xorg-lib-libXrender-devel
 BuildRequires:	xorg-lib-libXt-devel
 BuildRequires:	xz
 BuildRequires:	zlib-devel
 Requires:	cairo >= 1.10
 Requires:	enchant >= 0.22
+Requires:	fontconfig-libs >= 2.5.0
+Requires:	freetype >= 1:2.1.8
 Requires:	glib2 >= 1:2.36.0
 Requires:	gstreamer >= 1.0.3
 Requires:	gstreamer-plugins-base >= 1.0.3
+Requires:	gtk+2 >= 2:2.24.10
 Requires:	gtk+3 >= 3.6.0
+Requires:	harfbuzz >= 0.9.7
 Requires:	libsoup >= 2.42.0
 Requires:	libxml2 >= 1:2.6.30
 Requires:	libxslt >= 1.1.7
@@ -122,7 +129,9 @@ Dokumentacja API WebKita.
 %{__autoconf}
 %configure \
 	--disable-silent-rules \
+	--enable-glx \
 	%{__enable_disable introspection} \
+	--enable-webgl \
 	--with-gtk=3.0 \
 	--enable-geolocation \
 	--disable-gtk-doc \
