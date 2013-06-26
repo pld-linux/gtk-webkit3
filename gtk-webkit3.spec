@@ -7,12 +7,12 @@
 Summary:	Port of WebKit embeddable web component to GTK+ 3
 Summary(pl.UTF-8):	Port osadzalnego komponentu WWW WebKit do GTK+ 3
 Name:		gtk-webkit3
-Version:	2.0.1
-Release:	2
+Version:	2.0.3
+Release:	1
 License:	BSD-like
 Group:		X11/Libraries
 Source0:	http://webkitgtk.org/releases/webkitgtk-%{version}.tar.xz
-# Source0-md5:	69c2037b6d2644d789d34940eac9c993
+# Source0-md5:	9eca9eec4595b66b72a1ac7ceaef08ba
 Patch0:		sync-builtins.patch
 Patch1:		%{name}-sh.patch
 Patch2:		gtk-webkit-pl.po.patch
@@ -42,6 +42,7 @@ BuildRequires:	gtk+2-devel >= 2:2.24.10
 BuildRequires:	gtk+3-devel >= 3.6.0
 BuildRequires:	gtk-doc >= 1.10
 BuildRequires:	harfbuzz-devel >= 0.9.7
+BuildRequires:	harfbuzz-icu-devel >= 0.9.7
 BuildRequires:	libicu-devel >= 4.2.1
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
@@ -58,7 +59,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	python
 BuildRequires:	rpmbuild(macros) >= 1.592
 BuildRequires:	ruby
-BuildRequires:	sqlite3-devel >= 3.0
+BuildRequires:	sqlite3-devel >= 3
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	udev-glib-devel
 BuildRequires:	xorg-lib-libXcomposite-devel
@@ -127,9 +128,9 @@ Dokumentacja API WebKita.
 %build
 %{__libtoolize}
 %{__aclocal} -I Source/autotools
+%{__autoconf}
 %{__autoheader}
 %{__automake}
-%{__autoconf}
 %configure \
 	--disable-gtk-doc \
 	--disable-silent-rules \
