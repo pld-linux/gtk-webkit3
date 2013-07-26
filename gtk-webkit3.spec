@@ -7,12 +7,12 @@
 Summary:	Port of WebKit embeddable web component to GTK+ 3
 Summary(pl.UTF-8):	Port osadzalnego komponentu WWW WebKit do GTK+ 3
 Name:		gtk-webkit3
-Version:	2.0.3
-Release:	2
+Version:	2.0.4
+Release:	1
 License:	BSD-like
 Group:		X11/Libraries
 Source0:	http://webkitgtk.org/releases/webkitgtk-%{version}.tar.xz
-# Source0-md5:	9eca9eec4595b66b72a1ac7ceaef08ba
+# Source0-md5:	413be319ba171feed9348d1bede6b0a7
 Patch0:		sync-builtins.patch
 Patch1:		%{name}-sh.patch
 Patch2:		gtk-webkit-pl.po.patch
