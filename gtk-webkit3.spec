@@ -48,7 +48,8 @@ BuildRequires:	libpng-devel
 BuildRequires:	libsecret-devel
 BuildRequires:	libsoup-devel >= 2.42.0
 BuildRequires:	libstdc++-devel
-BuildRequires:	libtool >= 2:1.5
+# libtool with -fuse-ld= gcc option support
+BuildRequires:	libtool >= 2:2.4.2-13
 BuildRequires:	libwebp-devel
 BuildRequires:	libxml2-devel >= 1:2.6.30
 BuildRequires:	libxslt-devel >= 1.1.7
@@ -67,6 +68,7 @@ BuildRequires:	xorg-lib-libXrender-devel
 BuildRequires:	xorg-lib-libXt-devel
 BuildRequires:	xz
 BuildRequires:	zlib-devel
+BuildRequires:	/usr/bin/ld.gold
 Requires:	cairo >= 1.10
 Requires:	enchant >= 0.22
 Requires:	fontconfig-libs >= 2.5.0
