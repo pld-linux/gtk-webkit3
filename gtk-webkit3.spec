@@ -132,6 +132,7 @@ Dokumentacja API WebKita.
 %{__autoheader}
 %{__automake}
 %configure \
+	LDFLAGS="%{rpmldflags} -fuse-ld=gold" \
 	--disable-gtk-doc \
 	--disable-silent-rules \
 	--enable-geolocation \
@@ -139,8 +140,7 @@ Dokumentacja API WebKita.
 	%{__enable_disable introspection} \
 	--enable-webgl \
 	--with-gtk=3.0 \
-	--with-html-dir=%{_gtkdocdir} \
-	LDFLAGS="%{rpmldflags} -fuse-ld=gold"
+	--with-html-dir=%{_gtkdocdir}
 
 %{__make} -j1
 
