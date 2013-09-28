@@ -1,5 +1,6 @@
 # TODO: review configure options:
 # - gamepad, web-audio
+# - battery-status (BR: upower-devel)
 #
 # Conditional build:
 %bcond_without	introspection	# disable introspection
