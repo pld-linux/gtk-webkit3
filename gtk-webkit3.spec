@@ -4,18 +4,19 @@
 #
 # Conditional build:
 %bcond_without	introspection	# disable introspection
-#
+
 Summary:	Port of WebKit embeddable web component to GTK+ 3
 Summary(pl.UTF-8):	Port osadzalnego komponentu WWW WebKit do GTK+ 3
 Name:		gtk-webkit3
 Version:	2.2.4
-Release:	1
+Release:	2
 License:	BSD-like
 Group:		X11/Libraries
 Source0:	http://webkitgtk.org/releases/webkitgtk-%{version}.tar.xz
 # Source0-md5:	d2af0d2d75f18cac33bd82ee63e22571
 Patch0:		sync-builtins.patch
 URL:		http://webkitgtk.org/
+BuildRequires:	/usr/bin/ld.gold
 BuildRequires:	EGL-devel
 BuildRequires:	OpenGL-GLX-devel
 BuildRequires:	at-spi2-core-devel >= 2.6.0
@@ -27,7 +28,6 @@ BuildRequires:	enchant-devel >= 0.22
 BuildRequires:	flex >= 2.5.33
 BuildRequires:	fontconfig-devel >= 2.5.0
 BuildRequires:	freetype-devel >= 1:2.1.8
-BuildRequires:	gcc-c++ >= 6:4.7
 BuildRequires:	geoclue-devel
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.36.0
@@ -36,6 +36,7 @@ BuildRequires:	glibc-misc
 BuildRequires:	gperf
 BuildRequires:	gstreamer-devel >= 1.0.3
 BuildRequires:	gstreamer-plugins-base-devel >= 1.0.3
+BuildRequires:	libstdc++-devel >= 6:4.7
 # GTK+ 2.x for webkit2 plugin process; GTK+ 3 for base GUI
 BuildRequires:	gtk+2-devel >= 2:2.24.10
 BuildRequires:	gtk+3-devel >= 3.10.0
@@ -68,7 +69,6 @@ BuildRequires:	xorg-lib-libXrender-devel
 BuildRequires:	xorg-lib-libXt-devel
 BuildRequires:	xz
 BuildRequires:	zlib-devel
-BuildRequires:	/usr/bin/ld.gold
 Requires:	cairo >= 1.10
 Requires:	enchant >= 0.22
 Requires:	fontconfig-libs >= 2.5.0
@@ -87,7 +87,8 @@ Requires:	pango >= 1:1.32.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-gtk-webkit3 is a port of the WebKit embeddable web component to GTK+ 3.
+gtk-webkit3 is a port of the WebKit embeddable web component to GTK+
+3.
 
 %description -l pl.UTF-8
 gtk-webkit3 to port osadzalnego komponentu WWW WebKit do GTK+ 3.
@@ -113,6 +114,9 @@ Summary:	WebKit API documentation
 Summary(pl.UTF-8):	Dokumentacja API WebKita
 Group:		Documentation
 Requires:	gtk-doc-common
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description apidocs
 WebKit API documentation.
