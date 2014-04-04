@@ -16,6 +16,7 @@ Group:		X11/Libraries
 Source0:	http://webkitgtk.org/releases/webkitgtk-%{version}.tar.xz
 # Source0-md5:	c759bf11fe4cadd1268630f16a97f7b9
 URL:		http://webkitgtk.org/
+BuildRequires:	/usr/bin/ld.gold
 BuildRequires:	EGL-devel
 BuildRequires:	OpenGL-GLX-devel
 BuildRequires:	at-spi2-core-devel >= 2.6.0
@@ -36,6 +37,7 @@ BuildRequires:	glibc-misc
 BuildRequires:	gperf
 BuildRequires:	gstreamer-devel >= 1.0.3
 BuildRequires:	gstreamer-plugins-base-devel >= 1.0.3
+BuildRequires:	libstdc++-devel >= 6:4.7
 # GTK+ 2.x for webkit2 plugin process; GTK+ 3 for base GUI
 BuildRequires:	gtk+2-devel >= 2:2.24.10
 BuildRequires:	gtk+3-devel >= 3.10.0
@@ -68,7 +70,6 @@ BuildRequires:	xorg-lib-libXrender-devel
 BuildRequires:	xorg-lib-libXt-devel
 BuildRequires:	xz
 BuildRequires:	zlib-devel
-BuildRequires:	/usr/bin/ld.gold
 Requires:	cairo >= 1.10
 Requires:	enchant >= 0.22
 Requires:	fontconfig-libs >= 2.5.0
@@ -117,6 +118,9 @@ Summary:	WebKit API documentation
 Summary(pl.UTF-8):	Dokumentacja API WebKita
 Group:		Documentation
 Requires:	gtk-doc-common
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description apidocs
 WebKit API documentation.
