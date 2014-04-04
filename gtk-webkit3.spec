@@ -4,17 +4,17 @@
 #
 # Conditional build:
 %bcond_without	introspection	# disable introspection
+%bcond_without	wayland		# Wayland target
 #
 Summary:	Port of WebKit embeddable web component to GTK+ 3
 Summary(pl.UTF-8):	Port osadzalnego komponentu WWW WebKit do GTK+ 3
 Name:		gtk-webkit3
-Version:	2.2.4
+Version:	2.4.0
 Release:	1
 License:	BSD-like
 Group:		X11/Libraries
 Source0:	http://webkitgtk.org/releases/webkitgtk-%{version}.tar.xz
-# Source0-md5:	d2af0d2d75f18cac33bd82ee63e22571
-Patch0:		sync-builtins.patch
+# Source0-md5:	c759bf11fe4cadd1268630f16a97f7b9
 URL:		http://webkitgtk.org/
 BuildRequires:	EGL-devel
 BuildRequires:	OpenGL-GLX-devel
@@ -28,7 +28,7 @@ BuildRequires:	flex >= 2.5.33
 BuildRequires:	fontconfig-devel >= 2.5.0
 BuildRequires:	freetype-devel >= 1:2.1.8
 BuildRequires:	gcc-c++ >= 6:4.7
-BuildRequires:	geoclue-devel
+BuildRequires:	geoclue2-devel >= 2.1.5
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.36.0
 BuildRequires:	glibc-misc
@@ -86,8 +86,12 @@ Requires:	pango >= 1:1.32.0
 %{?with_introspection:Conflicts:	gir-repository < 0.6.5-7}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+# __once_call, __once_called non-function symbols from libstdc++
+%define		skip_post_check_so	lib.*gtk-3.0.*
+
 %description
-gtk-webkit3 is a port of the WebKit embeddable web component to GTK+ 3.
+gtk-webkit3 is a port of the WebKit embeddable web component to GTK+
+3.
 
 %description -l pl.UTF-8
 gtk-webkit3 to port osadzalnego komponentu WWW WebKit do GTK+ 3.
@@ -122,7 +126,6 @@ Dokumentacja API WebKita.
 
 %prep
 %setup -q -n webkitgtk-%{version}
-%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -137,6 +140,7 @@ Dokumentacja API WebKita.
 	--enable-geolocation \
 	--enable-glx \
 	%{__enable_disable introspection} \
+	%{!?with_wayland:--disable-wayland-target} \
 	--enable-webgl \
 	--with-gtk=3.0 \
 	--with-html-dir=%{_gtkdocdir}
@@ -164,6 +168,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog NEWS
 %attr(755,root,root) %{_bindir}/jsc-3
+%attr(755,root,root) %{_libexecdir}/WebKitNetworkProcess
 %attr(755,root,root) %{_libexecdir}/WebKitPluginProcess
 %attr(755,root,root) %{_libexecdir}/WebKitWebProcess
 %attr(755,root,root) %{_libdir}/libwebkitgtk-3.0.so.*.*.*
@@ -176,6 +181,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/girepository-1.0/JavaScriptCore-3.0.typelib
 %{_libdir}/girepository-1.0/WebKit-3.0.typelib
 %{_libdir}/girepository-1.0/WebKit2-3.0.typelib
+%{_libdir}/girepository-1.0/WebKit2WebExtension-3.0.typelib
 %endif
 %dir %{_libdir}/webkit2gtk-3.0
 %dir %{_libdir}/webkit2gtk-3.0/injected-bundle
@@ -193,13 +199,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gir-1.0/JavaScriptCore-3.0.gir
 %{_datadir}/gir-1.0/WebKit-3.0.gir
 %{_datadir}/gir-1.0/WebKit2-3.0.gir
+%{_datadir}/gir-1.0/WebKit2WebExtension-3.0.gir
 %endif
 %{_includedir}/webkitgtk-3.0
+%{_pkgconfigdir}/javascriptcoregtk-3.0.pc
 %{_pkgconfigdir}/webkitgtk-3.0.pc
 %{_pkgconfigdir}/webkit2gtk-3.0.pc
-%{_pkgconfigdir}/javascriptcoregtk-3.0.pc
+%{_pkgconfigdir}/webkit2gtk-web-extension-3.0.pc
 
 %files apidocs
 %defattr(644,root,root,755)
 %{_gtkdocdir}/webkitgtk
 %{_gtkdocdir}/webkit2gtk
+%{_gtkdocdir}/webkitdomgtk
