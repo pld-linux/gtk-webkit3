@@ -15,6 +15,7 @@ License:	BSD-like
 Group:		X11/Libraries
 Source0:	http://webkitgtk.org/releases/webkitgtk-%{version}.tar.xz
 # Source0-md5:	c57ebecff1ba7663b303e21a64840c48
+Patch0:		atomic-ops.patch
 URL:		http://webkitgtk.org/
 BuildRequires:	/usr/bin/ld.gold
 BuildRequires:	EGL-devel
@@ -44,6 +45,9 @@ BuildRequires:	gtk+3-devel >= 3.10.0
 BuildRequires:	gtk-doc >= 1.10
 BuildRequires:	harfbuzz-devel >= 0.9.7
 BuildRequires:	harfbuzz-icu-devel >= 0.9.7
+%ifarch i486
+BuildRequires:	libatomic-devel
+%endif
 BuildRequires:	libicu-devel >= 4.2.1
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
@@ -130,6 +134,9 @@ Dokumentacja API WebKita.
 
 %prep
 %setup -q -n webkitgtk-%{version}
+%ifarch i486
+%patch0 -p1
+%endif
 
 %build
 %{__libtoolize}

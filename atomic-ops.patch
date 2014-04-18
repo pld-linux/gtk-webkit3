@@ -1,0 +1,18 @@
+--- a/Source/WebKit2/GNUmakefile.am	2014-03-24 11:05:16.000000000 +0100
++++ b/Source/WebKit2/GNUmakefile.am	2014-04-18 16:51:18.331729235 +0200
+@@ -227,6 +227,7 @@
+ endif
+ 
+ libwebkit2gtk_@WEBKITGTK_API_MAJOR_VERSION@_@WEBKITGTK_API_MINOR_VERSION@_la_LIBADD := \
++	-latomic \
+ 	-lpthread \
+ 	libWebCore.la \
+ 	libWebCorePlatform.la \
+@@ -775,6 +775,7 @@
+ 	$(webkit2_plugin_process_sources)
+ 
+ Programs_WebKitPluginProcess_LDADD = \
++	-latomic \
+ 	-lpthread \
+ 	libjavascriptcoregtk-@WEBKITGTK_API_MAJOR_VERSION@.@WEBKITGTK_API_MINOR_VERSION@.la \
+ 	libWebCoreLayerGtk2.a \
