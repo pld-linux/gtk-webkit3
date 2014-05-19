@@ -45,7 +45,7 @@ BuildRequires:	gtk+3-devel >= 3.10.0
 BuildRequires:	gtk-doc >= 1.10
 BuildRequires:	harfbuzz-devel >= 0.9.7
 BuildRequires:	harfbuzz-icu-devel >= 0.9.7
-%ifarch i486
+%ifarch i386 i486
 BuildRequires:	libatomic-devel
 %endif
 BuildRequires:	libicu-devel >= 4.2.1
@@ -134,7 +134,7 @@ Dokumentacja API WebKita.
 
 %prep
 %setup -q -n webkitgtk-%{version}
-%ifarch i486
+%ifarch i386 i486
 %patch0 -p1
 %endif
 
