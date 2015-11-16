@@ -11,7 +11,7 @@ Summary(pl.UTF-8):	Port osadzalnego komponentu WWW WebKit do GTK+ 3
 Name:		gtk-webkit3
 # note: for 2.6.x series see gtk-webkit4
 Version:	2.4.9
-Release:	1
+Release:	2
 License:	BSD-like
 Group:		X11/Libraries
 Source0:	http://webkitgtk.org/releases/webkitgtk-%{version}.tar.xz
