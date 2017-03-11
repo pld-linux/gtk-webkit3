@@ -11,13 +11,14 @@ Summary(pl.UTF-8):	Port osadzalnego komponentu WWW WebKit do GTK+ 3
 Name:		gtk-webkit3
 # note: for 2.6.x series see gtk-webkit4
 Version:	2.4.11
-Release:	2
+Release:	3
 License:	BSD-like
 Group:		X11/Libraries
 Source0:	http://webkitgtk.org/releases/webkitgtk-%{version}.tar.xz
 # Source0-md5:	24a25ccc30a7914ae50922aedf24b7bc
 Patch0:		atomic-ops.patch
 Patch1:		x32.patch
+Patch2:		abs.patch
 URL:		http://webkitgtk.org/
 BuildRequires:	/usr/bin/ld.gold
 BuildRequires:	EGL-devel
@@ -140,6 +141,7 @@ Dokumentacja API WebKita.
 %patch0 -p1
 %endif
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__libtoolize}
