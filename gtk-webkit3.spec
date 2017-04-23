@@ -11,7 +11,7 @@ Summary(pl.UTF-8):	Port osadzalnego komponentu WWW WebKit do GTK+ 3
 Name:		gtk-webkit3
 # note: for 2.6.x series see gtk-webkit4
 Version:	2.4.11
-Release:	3
+Release:	4
 License:	BSD-like
 Group:		X11/Libraries
 Source0:	http://webkitgtk.org/releases/webkitgtk-%{version}.tar.xz
@@ -19,6 +19,7 @@ Source0:	http://webkitgtk.org/releases/webkitgtk-%{version}.tar.xz
 Patch0:		atomic-ops.patch
 Patch1:		x32.patch
 Patch2:		abs.patch
+Patch3:		%{name}-icu59.patch
 URL:		http://webkitgtk.org/
 BuildRequires:	/usr/bin/ld.gold
 BuildRequires:	EGL-devel
@@ -51,7 +52,7 @@ BuildRequires:	harfbuzz-icu-devel >= 0.9.7
 %ifarch i386 i486
 BuildRequires:	libatomic-devel
 %endif
-BuildRequires:	libicu-devel >= 4.2.1
+BuildRequires:	libicu-devel >= 59
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libsecret-devel
@@ -142,6 +143,7 @@ Dokumentacja API WebKita.
 %endif
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 %{__libtoolize}
