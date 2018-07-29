@@ -11,7 +11,7 @@ Summary(pl.UTF-8):	Port osadzalnego komponentu WWW WebKit do GTK+ 3
 Name:		gtk-webkit3
 # note: for 2.6.x series see gtk-webkit4
 Version:	2.4.11
-Release:	4
+Release:	5
 License:	BSD-like
 Group:		X11/Libraries
 Source0:	http://webkitgtk.org/releases/webkitgtk-%{version}.tar.xz
@@ -151,6 +151,9 @@ Dokumentacja API WebKita.
 %{__autoconf}
 %{__autoheader}
 %{__automake}
+%if "%{cxx_version}" >= "4.9"
+CXXFLAGS="%{rpmcxxflags} -fno-delete-null-pointer-checks"
+%endif
 %configure \
 %ifarch %{x8664}
 	LDFLAGS="%{rpmldflags} -fuse-ld=gold" \
