@@ -6,12 +6,17 @@
 %bcond_without	introspection	# disable introspection
 %bcond_without	wayland		# Wayland target
 #
+# it's not possible to build this with debuginfo on 32bit archs due to
+# memory constraints during linking
+%ifarch %{ix86} x32
+%define		_enable_debug_packages		0
+%endif
 Summary:	Port of WebKit embeddable web component to GTK+ 3
 Summary(pl.UTF-8):	Port osadzalnego komponentu WWW WebKit do GTK+ 3
 Name:		gtk-webkit3
 # note: for 2.6.x series see gtk-webkit4
 Version:	2.4.11
-Release:	5
+Release:	6
 License:	BSD-like
 Group:		X11/Libraries
 Source0:	http://webkitgtk.org/releases/webkitgtk-%{version}.tar.xz
