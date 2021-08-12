@@ -26,6 +26,10 @@ Patch1:		x32.patch
 Patch2:		abs.patch
 Patch3:		%{name}-icu59.patch
 Patch4:		icu65.patch
+Patch5:		glib2.68.patch
+Patch6:		icu68.patch
+Patch7:		grammar.patch
+Patch8:		volatile.patch
 URL:		http://webkitgtk.org/
 BuildRequires:	/usr/bin/ld.gold
 BuildRequires:	EGL-devel
@@ -149,6 +153,10 @@ Dokumentacja API WebKita.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
+%patch6 -p1
+%patch7 -p1
+%patch8 -p1
 
 %build
 %{__libtoolize}
