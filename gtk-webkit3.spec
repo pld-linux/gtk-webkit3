@@ -77,6 +77,7 @@ BuildRequires:	pango-devel >= 1:1.32.0
 BuildRequires:	perl-base
 BuildRequires:	pkgconfig
 BuildRequires:	python
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.592
 BuildRequires:	ruby
 BuildRequires:	sqlite3-devel >= 3
