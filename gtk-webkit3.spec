@@ -16,7 +16,7 @@ Summary(pl.UTF-8):	Port osadzalnego komponentu WWW WebKit do GTK+ 3
 Name:		gtk-webkit3
 # note: for 2.6.x series see gtk-webkit4
 Version:	2.4.11
-Release:	13
+Release:	14
 License:	BSD-like
 Group:		X11/Libraries
 Source0:	http://webkitgtk.org/releases/webkitgtk-%{version}.tar.xz
@@ -108,6 +108,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # __once_call, __once_called non-function symbols from libstdc++
 %define		skip_post_check_so	lib.*gtk-3.0.*
+
+# JSStringRef uses "!this" comparisons (UB)
+%define		specflags	-fno-delete-null-pointer-checks
 
 %description
 gtk-webkit3 is a port of the WebKit embeddable web component to GTK+
