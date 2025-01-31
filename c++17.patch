@@ -1,0 +1,38 @@
+--- webkitgtk-2.4.11/Source/autotools/SetupCompilerFlags.m4.orig	2016-04-10 08:48:38.000000000 +0200
++++ webkitgtk-2.4.11/Source/autotools/SetupCompilerFlags.m4	2025-01-31 13:59:54.320663422 +0100
+@@ -1,7 +1,7 @@
+ # Use C99 as the language standard for C code.
+ CFLAGS="$CFLAGS -pthread -std=c99"
+ # Use the C++11 standard. Do not warn about C++11 incompatibilities.
+-CXXFLAGS="$CXXFLAGS -pthread -std=c++11 -Wno-c++11-compat"
++CXXFLAGS="$CXXFLAGS -pthread -std=c++17 -Wno-c++17-compat"
+ 
+ # Clang requires suppression of unused arguments warnings.
+ if test "$c_compiler" = "clang"; then
+--- webkitgtk-2.4.11/Source/WTF/wtf/StdLibExtras.h.orig	2016-04-10 08:48:36.000000000 +0200
++++ webkitgtk-2.4.11/Source/WTF/wtf/StdLibExtras.h	2025-01-31 14:01:37.661090791 +0100
+@@ -324,7 +324,7 @@
+ // This adds various C++14 features for versions of the STL that may not yet have them.
+ namespace std {
+ // MSVC 2013 supports std::make_unique already.
+-#if !defined(_MSC_VER) || _MSC_VER < 1800
++#if __cplusplus < 201402L
+ template<class T> struct _Unique_if {
+     typedef unique_ptr<T> _Single_object;
+ };
+@@ -352,7 +352,6 @@
+ 
+ template<class T, class... Args> typename _Unique_if<T>::_Known_bound
+ make_unique(Args&&...) = delete;
+-#endif
+ 
+ // Compile-time integer sequences
+ // http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2013/n3658.html
+@@ -372,6 +371,7 @@
+ };
+ 
+ template<size_t length> struct make_index_sequence : public make_index_sequence_helper<length>::type { };
++#endif
+ 
+ #if COMPILER_SUPPORTS(CXX_USER_LITERALS)
+ // These literals are available in C++14, so once we require C++14 compilers we can get rid of them here.

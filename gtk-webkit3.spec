@@ -31,6 +31,7 @@ Patch6:		icu68.patch
 Patch7:		grammar.patch
 Patch8:		volatile.patch
 Patch9:		libxml2-2.12.patch
+Patch10:	c++17.patch
 URL:		http://webkitgtk.org/
 BuildRequires:	/usr/bin/ld.gold
 BuildRequires:	EGL-devel
@@ -163,6 +164,7 @@ Dokumentacja API WebKita.
 %patch -P7 -p1
 %patch -P8 -p1
 %patch -P9 -p1
+%patch -P10 -p1
 
 %build
 %{__libtoolize}
