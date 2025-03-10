@@ -54,7 +54,6 @@ BuildRequires:	glibc-misc
 BuildRequires:	gperf
 BuildRequires:	gstreamer-devel >= 1.0.3
 BuildRequires:	gstreamer-plugins-base-devel >= 1.0.3
-BuildRequires:	libstdc++-devel >= 6:4.7
 # GTK+ 2.x for webkit2 plugin process; GTK+ 3 for base GUI
 BuildRequires:	gtk+2-devel >= 2:2.24.10
 BuildRequires:	gtk+3-devel >= 3.10.0
@@ -69,7 +68,7 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libsecret-devel
 BuildRequires:	libsoup-devel >= 2.42.0
-BuildRequires:	libstdc++-devel
+BuildRequires:	libstdc++-devel >= 6:7
 # libtool with -fuse-ld= gcc option support
 BuildRequires:	libtool >= 2:2.4.2-13
 BuildRequires:	libwebp-devel
@@ -129,7 +128,7 @@ Requires:	%{name} = %{version}-%{release}
 Requires:	glib2-devel >= 1:2.36.0
 Requires:	gtk+3-devel >= 3.10.0
 Requires:	libsoup-devel >= 2.42.0
-Requires:	libstdc++-devel
+Requires:	libstdc++-devel >= 6:7
 
 %description devel
 Development files for WebKit for GTK+ 3.
@@ -172,9 +171,7 @@ Dokumentacja API WebKita.
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-%if "%{cxx_version}" >= "4.9"
-CXXFLAGS="%{rpmcxxflags} -fno-delete-null-pointer-checks"
-%endif
+CXXFLAGS="%{rpmcxxflags} -fno-delete-null-pointer-checks -Wno-expansion-to-defined"
 %configure \
 %ifarch %{x8664}
 	LDFLAGS="%{rpmldflags} -fuse-ld=gold" \
